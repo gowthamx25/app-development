@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 40%;
+        }
+        input, select {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 80%;
+            text-align: center;
+            font-size: 1em;
+        }
+        button {
+            background-color: #6a11cb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #2575fc;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let inputs = document.querySelectorAll('input');
+            for (let input of inputs) {
+                if (input.value === "") {
+                    alert("All fields must be filled out!");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Customer Segmentation Prediction</h2>
+        <p>Enter your details below to find out your customer segment:</p>
+        <form action="/result" method="post" onsubmit="return validateForm()">
+            <input type="number" name="Year_Birth" placeholder="Year of Birth" required><br>
+            <input type="number" name="Income" placeholder="Annual Income" required><br>
+            <select name="Currency">
+                <option value="USD" selected>USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="INR">INR (₹)</option>
+                <option value="GBP">GBP (£)</option>
+            </select><br>
+            <input type="number" name="Kidhome" placeholder="Number of Kids at Home" required><br>
+            <input type="number" name="Teenhome" placeholder="Number of Teenagers at Home" required><br>
+            <input type="number" name="Recency" placeholder="Days Since Last Purchase" required><br>
+            <input type="number" name="MntWines" placeholder="Amount Spent on Wines" required><br>
+            <input type="number" name="MntMeatProducts" placeholder="Amount Spent on Meat" required><br>
+            <input type="number" name="NumWebPurchases" placeholder="Total Web Purchases" required><br>
+            <input type="number" name="NumStorePurchases" placeholder="Total Store Purchases" required><br>
+            <button type="submit">Predict My Segment</button>
+        </form>
+        <br>
+        <a href="/visualize" style="color: white; text-decoration: none;">📊 View Customer Segments</a>
+    </div>
+</body>
+</html>

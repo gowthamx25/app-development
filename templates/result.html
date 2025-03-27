@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 50%;
+        }
+        h2 {
+            color: #ff4b2b;
+        }
+        ul {
+            text-align: left;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #ff4b2b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background-color: #ff416c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Customer Segment</h2>
+        <p><strong>You belong to the segment:</strong> <span style="color: #ff4b2b; font-size: 1.2em;">{{ cluster }}</span></p>
+        <h3>Your Profile:</h3>
+        <ul>
+            {% for key, value in input_data.items() %}
+            <li><strong>{{ key.replace('_', ' ') }}:</strong> {% if key == 'Income' %} {{ currency }}{{ "{:,}".format(value|int) }} {% else %} {{ value }} {% endif %}</li>
+            {% endfor %}
+        </ul>
+        <h3>Segment Insights:</h3>
+        <p>
+            {% if cluster == "Luxury Shoppers" %}
+                You are a high spender who prefers premium products and frequent purchases.
+            {% elif cluster == "Frequent Buyers" %}
+                You shop regularly and enjoy a mix of online and in-store purchases.
+            {% elif cluster == "Budget Seekers" %}
+                You look for discounts and shop occasionally but make strategic purchases.
+            {% else %}
+                Your segment is unique! More insights coming soon.
+            {% endif %}
+        </p>
+        <a class="btn" href="/">🔄 Make Another Prediction</a>
+        <a class="btn" href="/visualize">📊 View Customer Segments</a>
+    </div>
+</body>
+</html>
